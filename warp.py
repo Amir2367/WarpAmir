@@ -1,22 +1,5 @@
 import ipaddress, platform, subprocess, os, datetime, base64
 
-# Check if there's any error
-if process.returncode != 0:
-    print("Error: Warp execution failed.")
-else:
-    print("Warp executed successfully.")
-
-Bestip = []
-
-with open(result_path, 'r') as csv_file:
-    next(csv_file)
-    c = 0
-    for line in csv_file:
-        Bestip.append(line.split(',')[0])
-        c += 1
-        if c == 2:
-            break
-
 def warp_ip():
     creation_time = os.path.getctime(result_path)
     formatted_time = datetime.datetime.fromtimestamp(creation_time).strftime("%Y-%m-%d %H:%M:%S")
