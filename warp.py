@@ -1,33 +1,5 @@
 import ipaddress, platform, subprocess, os, datetime, base64
 
-
-
-def arch_suffix():
-    machine = platform.machine().lower()
-    if machine.startswith('i386') or machine.startswith('i686'):
-        return '386'
-    elif machine.startswith(('x86_64', 'amd64')):
-        return 'amd64'
-    elif machine.startswith(('armv8', 'arm64', 'aarch64')):
-        return 'arm64'
-    elif machine.startswith('s390x'):
-        return 's390x'
-    else:
-        raise ValueError("Unsupported CPU architecture")
-
-arch = arch_suffix()
-
-print("Fetch warp program...")
-url = f"https://gitlab.com/Misaka-blog/warp-script/-/raw/main/files/warp-yxip/warp-linux-{arch}"
-
-subprocess.run(["wget", url, "-O", "warp"])
-os.chmod("warp", 0o755)
-command = "./warp >/dev/null 2>&1"
-print("Scanning ips...")
-process = subprocess.Popen(command, shell=True)
-# Wait for the process to finish
-process.wait()
-
 # Check if there's any error
 if process.returncode != 0:
     print("Error: Warp execution failed.")
